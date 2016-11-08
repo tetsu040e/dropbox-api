@@ -1,0 +1,17 @@
+<html>
+<head>
+<title>[% title %]</title>
+</head>
+<body>
+  <h1>[% title %]</h1>
+  <div class="container">
+    <p><a href="./login">ログイン</a> (App Console に登録済みの redirect_uri)</p>
+    <p><a href="./login2">ログイン</a> (App Console に登録していない redirect_uri)</p>
+    [% IF data -%]
+    <p>こんにちは！[% data.name.display_name %]さん！</p>
+    [% ELSE -%]
+    <p>ログインしていません</p>
+    [% END -%]
+  </div>
+</body>
+</html>
