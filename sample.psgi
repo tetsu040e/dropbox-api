@@ -35,7 +35,9 @@ $router->add('/', sub {
         data  => $session->remove('data'),
     };
     my $html = Encode::encode(Encode::find_encoding('utf-8'), $tx->render('index.tt', $vars));
-    return ['200', ['Content-Type' => 'text/html', 'Content-length' => length($html)], [$html]];
+    my $res = Plack::Response->new(200);
+    $res->body($html);
+    return $res->finalize;
 });
 
 $router->add('/login', sub {
