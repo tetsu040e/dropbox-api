@@ -11,7 +11,7 @@
   <body>
     <h1>[% title %]</h1>
     <div class="container">
-      <p><a href="./login">ログイン</a> (App Console に登録済みの redirect_uri)</p>
+      <a href="./login">ログイン</a>
       [% IF data -%]
       <p>こんにちは！[% data.name.display_name %]さん！</p>
       [% ELSE -%]
