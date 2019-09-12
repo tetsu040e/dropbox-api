@@ -3,6 +3,9 @@
 Dropbox API を使ってみた
 
 ```
+cp config_sample.pl config.pl
+editor config.pl
+
 plackup sample.psgi -p 8080
 ```
 
