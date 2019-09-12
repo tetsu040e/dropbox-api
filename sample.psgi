@@ -46,30 +46,10 @@ $router->add('/login', sub {
     return $res->finalize;
 });
 
-$router->add('/login2', sub {
-    my ($req, $session) = @_;
-    my $uri = $dropbox->authorize({ redirect_uri => $config->{dropbox}->{redirect_uri}.2 });
-    my $res = Plack::Response->new(301);
-    $res->redirect($uri);
-    return $res->finalize;
-});
-
 $router->add('/auth', sub {
     my ($req, $session) = @_;
     my $code = $req->param('code');
     my $token = $dropbox->token($code, $config->{dropbox}->{redirect_uri});
-    my $account = $dropbox->get_current_account || { error => $dropbox->error };
-    $session->set('data', $account);
-
-    my $res = Plack::Response->new(301);
-    $res->redirect('./');
-    return $res->finalize;
-});
-
-$router->add('/auth2', sub {
-    my ($req, $session) = @_;
-    my $code = $req->param('code');
-    my $token = $dropbox->token($code, $config->{dropbox}->{redirect_uri}.2);
     my $account = $dropbox->get_current_account || { error => $dropbox->error };
     $session->set('data', $account);
 
