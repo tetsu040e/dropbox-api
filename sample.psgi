@@ -32,7 +32,7 @@ $router->add('/', sub {
     my ($req, $session) = @_;
     my $vars = +{
         title => 'dropbox api sample',
-        data  => $session->remove('data'),
+        data  => $session->get('data'),
     };
     my $html = Encode::encode(Encode::find_encoding('utf-8'), $tx->render('index.tt', $vars));
     my $res = Plack::Response->new(200);
@@ -56,7 +56,16 @@ $router->add('/auth', sub {
     $session->set('data', $account);
 
     my $res = Plack::Response->new(301);
-    $res->redirect('./');
+    $res->redirect('/');
+    return $res->finalize;
+});
+
+$router->add('/logout', sub {
+    my ($req, $session) = @_;
+    $session->remove('data');
+
+    my $res = Plack::Response->new(301);
+    $res->redirect('/');
     return $res->finalize;
 });
 
